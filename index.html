@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Muuda aasta arv rooma numbriteks!</h2>
+    <br>
+    <label for="year">Sisesta aasta mida muuta!</label><br>
+    <input type="text" pattern="\d*" id="year" name="year" maxlength="4"><br>
+    <button onclick="nrToRoman()">muuda!</button>
+    <p id="tulemus"></p>
+</body>
+    <script>
+      
+      //Function for converting numbers to roman numbers
+
+      function nrToRoman() {
+
+        //Numbers array contains numbers equal to roman numbers
+
+        const numbrilineV = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1];
+
+        //Roman numbers array of strings
+
+        const roomaV = ['M','CM','D','CD','C','XC','L','XL','X','IX','V','IV','I'];
+
+        //Get input value from input field
+
+        let number = document.getElementById('year').value;
+
+        //Error handling
+
+        document.getElementById("tulemus").style.color = "red";
+        if(!/^\d+$/.test(number)) return document.getElementById("tulemus").innerHTML="Sisesta aasta!";
+        if(!number ){
+            romaniseeritud = "Sisesta aasta!";
+            document.getElementById("tulemus").innerHTML=romaniseeritud;
+        }else{
+
+          //Map numbers array
+
+          let romaniseeritud = '';
+          numbrilineV.map((a, i) => {
+          
+          //While mapped number is less or equal to input number
+
+          while (a <= number) {
+
+            //Add roman number string with the mapped index of number to output string
+            
+            romaniseeritud += roomaV[i];
+
+            //Subtract the number from input number
+            
+            number -= a;
+          }
+
+          //Return the results
+          document.getElementById("tulemus").style.color = "black";
+          document.getElementById("tulemus").innerHTML="Rooma numbrites: " + romaniseeritud;
+        });
+        }
+      }
+    </script>
+</html>
